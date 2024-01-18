@@ -16,7 +16,7 @@ You will furthermore need an example dataset. In our case we will use a terrestr
 
 The dataset can be downloaded here:
 
-[TLS dataset used in this tutorial](https://drive.google.com/file/d/1Uy8tpSwqWlodZ2mV2m-39gDlADxczayz/view?usp=sharing)
+[TLS dataset used in this tutorial](https://drive.google.com/file/d/1Dexdy0uVf58Nh7TfX1srp9FMJ9HrrxME/view?usp=sharing)
 
 
 
@@ -263,6 +263,7 @@ You can adapt 6 settings in total and all of these settings relate to the 3rd pa
 
 In the first tutorial we were dealing with a TLS dataset from a forest stand with comparably simple structure and of high quality. In this exercise we will use a a new dataset which you can access here:
 
+[GeoSlam point cloud](https://drive.google.com/file/d/1LEx7WtGt4IHm17KbmbvnFega2jIwXJD6/view?usp=sharing)
 
 This dataset was collected with a GeoSlam Horizon Mobile Laser Scanning (MLS) system in a forest stand which has a more complex forest structure with more pronounced understorey and also a more complex terrain situation. Furthermore, the dataset is a bit more noisy. MLS systems typically have an increased noise level as compared to the TLS data.
 
