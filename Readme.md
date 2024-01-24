@@ -1,14 +1,16 @@
-﻿# 3DFin tutorial
+﻿# 3DFin CloudCompare tutorial
 
-## Getting started with 3DFin to extract individual tree information from terrestrial point clouds
+## Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds
 
-- to understand the basic concepts behind the 3DFin workflow
-- learn how to apply the 3DFin software to extract individual trees from a 3D point-cloud
-- understand what the outputs of the 3DFin workflow mean
+Goals:
+
+- To understand the basic concepts behind the 3DFin workflow
+- To learn how to use 3DFin software to extract individual trees from a 3D point cloud
+- To understand what the outputs of the 3DFin workflow mean
 
 ### Requirements to run this tutorial
 
-This tutorial uses real world data to showcase its contents. The tutorial is detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
+This tutorial uses real world data to showcase its contents. It is detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
 
 [Download CloudCompare](https://www.danielgm.net/cc/release/) 
 
@@ -256,22 +258,21 @@ You can adapt 6 settings in total and all of these settings relate to the 3rd pa
 
 **In this first section of the tutorial, the basics of using 3DFin were covered. In the following section, common situations/questions that may arise while using 3DFin are explained with examples.**
 
- Expect more cases to be added in the future here!
+Expect more cases to be added in the future here!
 
 ## Case I - adjusting DTM interpolation settings
 
-### Running 3DFin for a dataset collected with a mobile laserscanning system (GeoSlam)
+### Modify cloth resolution to improve results 
 
- This case covers a simple modification to Basic parameter "cloth resolution" which may improve substantially the results obtained with 3DFin.
+*This case covers a simple modification to Basic parameter "cloth resolution", which may improve substantially the results obtained with 3DFin. It also showcases a way to quickly assess visually the results by using the scalar field "dist_to_axis".*
  
-  This time we will use a different dataset, which you can access here:
+We will use a different dataset for this demonstration, which you can access here:
 
 [GeoSlam point cloud](https://drive.google.com/file/d/1LEx7WtGt4IHm17KbmbvnFega2jIwXJD6/view?usp=sharing)
 
 This dataset was collected with a GeoSlam Horizon Mobile Laser Scanning (MLS) system in a forest stand which has a more complex forest structure with more pronounced understorey and also a more complex terrain situation. Furthermore, the dataset is a bit more noisy. MLS systems typically have an increased noise level as compared to the TLS data.
 
 A visualization of the dataset after loading it to CloudCompare can be seen in Figure 27.
-
 
 ![Figure 27: MLS dataset in CloudCompare](figures/Fig_27.png)
 
@@ -298,17 +299,17 @@ If we additionally activate the point-cloud we can see that the interpolated DTM
 
 **Figure 30: Mismatch between DTM and point cloud.**
 
-If we add to the visualization the detected tree stem segments in the stripe (see Section I of the tutorial above) we can also see that the workflow missed several trees during the stem detection phase (marked in Figure 31).
+**If we visualize the processed point cloud and activate "dist_to_axis" scalar field (Fig. 31), we can very easily check which trees have been detected and which haven't.** This is probably the easiest way to spot that something went wrong and the first thing you should do to assess the results. 
 
 ![Figure 31: Several trees were not detected](figures/Fig_31.png)
 
 **Figure 31: Several trees were not detected.**
 
-In this specific case, the main reason for these suboptimal results is the quality of the DTM. Since the DTM is not accurately representing the actual shape of the ground, the normalization of the heights leads to wrong point distributions in some parts of the dataset which affect the workflow negatively. The reason for the low quality of the DTM relates to the comparably steep regions between the individual terrace planes in the plot. The DTM interpolation in this case fails to accurately capture these steep parts because the spatial resolution applied during the DTM interpolation is too coarse. 
+*In this specific case, the main reason for these suboptimal results is the quality of the DTM.* Since the DTM is not accurately representing the actual shape of the ground, the normalization of the heights leads to wrong point distributions in some parts of the dataset which affect the workflow negatively. The reason for the low quality of the DTM relates to the comparably steep regions between the individual terrace planes in the plot. The DTM interpolation in this case fails to accurately capture these steep parts because the spatial resolution applied during the DTM interpolation is too coarse. 
 
-We will now try to fix this by changing the so called "cloth resolution" in the Basic settings of 3DFin.
+*We will now try to fix this by changing the so called "cloth resolution" parameter in the Basic tab of 3DFin.*
 
-For this, we restart the 3DFin workflow and use the exactly same basic settings as in the run before but before we press the "compute" button, we **change the "Cloth resolution" to 0.4 m** (marked in red in Fig. 32) and then press **"Compute".**
+For this, we restart the 3DFin workflow and use the exactly same basic settings as in the previous run, but before we press the "compute" button, we **change the "Cloth resolution" to 0.4 m** (marked in red in Fig. 32) and then press **"Compute".**
 
 
 ![Figure 32: Change the cloth resolution.](figures/Fig_32.png)
