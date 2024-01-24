@@ -1,4 +1,16 @@
-﻿# 3DFin CloudCompare tutorial
+﻿- [3DFin CloudCompare tutorial](#3dfin-cloudcompare-tutorial)
+  - [Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds](#getting-started-with-3dfin-plugin-to-extract-individual-tree-information-from-terrestrial-point-clouds)
+    - [Requirements to run this tutorial](#requirements-to-run-this-tutorial)
+    - [Starting 3DFin in CloudCompare](#starting-3dfin-in-cloudcompare)
+    - [Running the 3DFin workflow in the Basic mode](#running-the-3dfin-workflow-in-the-basic-mode)
+    - [Understanding the 3D Fin workflow outputs](#understanding-the-3d-fin-workflow-outputs)
+    - [Tabular output data](#tabular-output-data)
+    - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
+  - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
+    - [Modify cloth resolution to improve results](#modify-cloth-resolution-to-improve-results)
+
+
+# 3DFin CloudCompare tutorial
 
 ## Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds
 
@@ -10,7 +22,7 @@ Goals:
 
 ### Requirements to run this tutorial
 
-This tutorial uses real world data to showcase its contents. It is detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
+This tutorial uses real world data to showcase its contents. Its detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
 
 [Download CloudCompare](https://www.danielgm.net/cc/release/) 
 
