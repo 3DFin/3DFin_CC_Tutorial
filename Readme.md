@@ -1,4 +1,4 @@
-﻿# 3dFin tutorial
+﻿# 3DFin tutorial
 
 ## Getting started with 3DFin to extract individual tree information from terrestrial point clouds
 
@@ -24,32 +24,32 @@ It is a terrestrial laserscan (TLS) from a pine stand (*Pinus sylvestris*) in a 
 
 This should lead to a situation as shown in Figure 1.
 
-![Figure 1: CloudCompare with 3DFin extension installed](Fig_01.png)
+![Figure 1: CloudCompare with 3DFin extension installed](figures/Fig_01.png)
 **Figure 1: CloudCompare with 3DFin extension installed.**
 
 Your actual view is likely to appear a bit different since you might have other and additional toolbars activated. You might have to press on a little arrow-button on the top right of the menu bar to be able to see the relevant icons which are marked in Figure 1.
 
 We are now ready to open our example dataset and start working with the 3DFin plugin. To open the dataset, we select **File => Open**  (Figure 2) and then in the new window browse to the ***pointcloud_pines_brandenburg.las*** file, select it and press **"Open"**.
 
-![Figure 2: Open the example dataset](Fig_02.png)
+![Figure 2: Open the example dataset](figures/Fig_02.png)
 
 **Figure 2: Open the example dataset.**
 
 In the then appearing dialogue we use the standard settings to open the file. That is, in the first window we press **"Apply All"** (Figure 3) and in the second window **"Yes to All"** (Figure 4).
 
 
-![Figure 3: The open dataset dialogue in CloudCompare 1/2](Fig_03.png)
+![Figure 3: The open dataset dialogue in CloudCompare 1/2](figures/Fig_03.png)
 
 **Figure 3: The open dataset dialogue in CloudCompare 1/2.**
 
-![Figure 4: The open dataset dialogue in CloudCompare 2/2](Fig_04.png)
+![Figure 4: The open dataset dialogue in CloudCompare 2/2](figures/Fig_04.png)
 
 **Figure 4: The open dataset dialogue in CloudCompare 2/2.**
 
 This should result in a situation as shown in Figure 5
 
 
-![Figure 5: CloudCompare view after loading the example dataset](Fig_05.png)
+![Figure 5: CloudCompare view after loading the example dataset](figures/Fig_05.png)
 **Figure 5: CloudCompare view after loading the example dataset.**
 
 If you want to adjust some basic visualization settings of the point cloud you can get some first indications on how to achieve this in the following tutorial:
@@ -64,7 +64,7 @@ This will open the 3DFin plugin and its main window as shown in Figure 6.
 
 ### Running the 3DFin workflow in the Basic mode
 
-![Figure 6: The 3DFin user interface in CloudCompare](Fig_06.png)
+![Figure 6: The 3DFin user interface in CloudCompare](figures/Fig_06.png)
 
 **Figure 6: The 3DFin user interface in CloudCompare.**
 
@@ -92,7 +92,7 @@ We finally define an "**output directory**" and then press "**Compute**" to run 
 
 You will be continuously updated on the progress in the console window at the bottom of the CloudCompare user interface (marked in Fig. 7).
 
-![Figure 7: Progress of the 3DFin work-flow in the console window](Fig_07.png)
+![Figure 7: Progress of the 3DFin work-flow in the console window](figures/07.png)
 **Figure 7: Progress of the 3DFin work-flow in the console window.**
 
 The duration to run the whole process of identifying and segmenting the tree trunks can take anything from a few seconds up to several minutes depending on the size of the applied dataset, the user-defined settings and the applied hardware. Typically, very long processing times (several hours) are not expected since the process is limited by the available memory and too large datasets cannot be processed in the current version. With the example dataset used in this Tutorial the processing takes approximately 5-10 min with a laptop with good (but not top-notch) performance (for example with my laptop with an i7 CPU and 16 GB RAM it takes around 7-8 minutes).
@@ -101,7 +101,7 @@ The duration to run the whole process of identifying and segmenting the tree tru
 
 Once the work-flow as terminated, you will see some new outputs in the CloudCompare DB tree window as shown in Figure 8 (marked with 1). By default, three of the in total 7 output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem section circular tree rings, the diameter at breast height and the tree height.
 
-![Figure 8: Outputs of the 3DFin work-flow](Fig_08.png)
+![Figure 8: Outputs of the 3DFin work-flow](figures/Fig_08.png)
 
 **Figure 8: Outputs of the 3DFin work-flow.**
 
@@ -109,29 +109,29 @@ In the following we will have a look at each of the outputs individually which i
 
 The first step in work-flow is to normalize the pointcloud and derive a digital terrain model (DTM). Figure 9 shows the visualization of the DTM of the example dataset as represented by a point cloud of the ground points. In this case the extracted DTM looks quite plausible. There might be other situation where the automatically derived DTM is not of sufficient quality. We will have a look at this issue in one of the cases explained later.
 
-![Figure 9: DTM derived in the 3DFin work-flow](Fig_9_dtm.png)
+![Figure 9: DTM derived in the 3DFin work-flow](figures/Fig_9_dtm.png)
 
 **Figure 9: DTM derived in the 3DFin work-flow.**
 
 In figure 10, we can see the identified tree segments from the second step of the 3DFin work-flow during which point-cloud patterns showing a vertical continuity are identified in the user-defined height range (see stripe range setting above). In our case, all of these tree segments will be displayed for the height between 1.5 m and 4.5 m.
 
-![Figure 10: Tree segments identified by the 3DFin workflow](Fig_10_stem_segments.png)
+![Figure 10: Tree segments identified by the 3DFin workflow](figures/Fig_10_stem_segments.png)
 **Figure 10: Tree segments identified by the 3DFin workflow.**
 
 As next step in the workflow an axis is fitted through the centers of the tree section discs shown in Figure 10. This step is accomplished by deriving the 1st axis of a Principal Component Analysis using the 3D-positions of the identified tree stem section centers as input. These fitted axes are then used as orientation for the circle-fitting algorithm. That is, along this axes, the algorithm will search for circular shapes, representing points reflected by the tree stem, within a circular buffer with a (optionally user-defined) fixed radius around the axis.  This step will repeated in regular (optionally user-defined) height intervals. The axes for our example dataset are shown in Figure 11 and the respective circle fitting output is shown in Figure 12.
 
-![Figure 11: Axes fitted from the tree stem segments](Fig_11_axes.png)
+![Figure 11: Axes fitted from the tree stem segments](figures/Fig_11_axes.png)
 
 **Figure 11: Axes fitted from the tree stem segments.**
 
 The axes (in Figure 11) are color-coded according to their tilting angle and you can see that axes that show a higher tilting relative to the other trees (that is, deviating notably from the average vertical orientation of a tree stems in the dataset) are shown in red. This is not necessarily an indicator for wrongly identified tree stems as trees sometimes are leaning but it might be a good idea to visually re-examine such trees by comparing the identified stem sections with the point cloud.
 
-![Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11](Fig_12_fitted_sections.png)
+![Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11](figures/Fig_12_fitted_sections.png)
 **Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11.**
 
 Similarly, fitted circles that show unexpected dimensions (for example a notably larger radius than the circle below) or locations are displayed in red. Most of the time these problematic circles should not be considered during subsequent processing step since it is actually quite rare that for example a tree will increase its diameter (notably) with height or that the stem shape deviates notably from a vertically continuous cylinder-like form. Some information related to the circle fitting quality is also stored in the tabular output data that we will discuss further below in the Tutorial.
 
-![Figure 13: Distance axes](Fig_13_distance_axis.png)
+![Figure 13: Distance axes](figures/13_distance_axis.png)
 
 **Figure 13: Distance axes.**
 
@@ -139,19 +139,19 @@ In Figure 13 you can see the original point cloud with point colors relating to 
 
 In Figure 14 the height of each detected tree is displayed. The height is defined as the height of the highest non-isolated point in a cylindrical region around the axes (Figure 11).
 
-![Figure 14: Tree height](Fig_14_height.png)
+![Figure 14: Tree height](figures/Fig_14_height.png)
 
 **Figure 14: Tree height.**
 
 Finally, in Figure 15, the diameter at breast height (DBH) of each tree is shown. The diameter at breast height is interpolated from the diameters of the fitted circles (Figure 12) above and below the DBH height of 1.3. In case there are no high-quality fitted circles available within a certain range above and below the 1.3 m position, the workflow will set the DBH of this tree to "non-reliable" instead of providing a diameter estimate.
 
-![Figure 15: Tree DBH](Fig_15_tree_locationspng.png)
+![Figure 15: Tree DBH](figures/Fig_15_tree_locationspng.png)
 
 **Figure 15: Tree DBH.**
 
 We now have had a look at all outputs of the 3DFin workflow within CloudCompare. If you want to keep a copy of these files, you have the option to save the CloudCompare project into a "Cloud Compare Entities" binary file by selecting all the files in the DB Tree window and then select **"File -> Save"** (Fig. 16). Select **"Cloud Compare Entities"** as file format and then browse to a folder where you want to save the project and click **"Save"**. You should now be able to re-load your current state with all files the next time you open CloudCompare by simply selecting **"File -> Open"** and then browse to the folder where you stored the file.
 
-![Figure 16: Tree DBH](Fig_16_save_cc.png)
+![Figure 16: Tree DBH](figures/Fig_16_save_cc.png)
 
 **Figure 16: Tree DBH.**
 
@@ -161,7 +161,7 @@ We have now completed the basic 3DFin workflow in CloudCompare and will have a c
 
 As first step, browse to the output folder which you defined in the CloudCompare work-flow window before starting the computations. Then open the Excel-File that was created as output of the workflow. You should see a situation as shown in Figure 17.
 
-![Figure 17: Output Excel file](Fig_17_excel1.png)
+![Figure 17: Output Excel file](figures/Fig_17_excel1.png)
 
 **Figure 17: Output Excel file.**
 
@@ -173,14 +173,14 @@ On the first sheet called "Plot Metrics" you find the total height (TH), the dia
 *Diameters*
 In the diameters sheet you can find diameter of all stem section (columns) of all trees (rows) (Figure 18). The number of stem sections varies based on the height of the trees and you will see that as a consequence typically all trees will have several fields with 0 diameter in some higher stem section columns in the table.
 
-![Figure 18: Diameter sheet](Fig_18_excel2.png)
+![Figure 18: Diameter sheet](figures/18_excel2.png)
 
 **Figure 18: Diameter sheet.**
 
 *X*
 The X sheet contains the x-coordinates of the center points of all stem sections (columns) of all trees (rows) (Figure 19)
 
-![Figure 19: X sheet](Fig_19_excel3.png)
+![Figure 19: X sheet](figures/Fig_19_excel3.png)
 
 **Figure 19: X sheet.**
 
@@ -190,7 +190,7 @@ The Y sheet contains the y-coordinates of the center points of all stem sections
 *Sections*
 The Sections sheet shows the heights for which stem sections were determined (Figure 20). These values depend on the user-defined lowest section height and the selected height-interval. These values are the same for all trees an are hence only displayed once.
 
-![Figure 20: Sections sheet](Fig_20_excel4.png)
+![Figure 20: Sections sheet](figures/Fig_20_excel4.png)
 
 **Figure 20: Sections sheet.**
 
@@ -201,7 +201,7 @@ The next four sheets contain information on the quality of each stem section. Th
 
 The  *Q1(Outlier Probability)* sheet contains a number for each stem segment of each trees  which indicates how likely it is that an identified segment is actually not part of the tree stem (as represented by all other tree segments of the same tree) (Figure 21).  The higher the value, the more likely that the given section is an outlier. 
 
-![Figure 21: Outlier Probability](Fig_21_excel5.png)
+![Figure 21: Outlier Probability](figures/Fig_21_excel5.png)
 
 **Figure 21: Outlier Probability.**
 
@@ -209,7 +209,7 @@ This indicator value bases on a calculation which is illustrated in Figure 22. T
 
 As shown in Figure 22, the inclination angles (symbolized by the arrows) of the visualized stem sections of Tree A (Section 1,2,3,7) are all very comparable and hence the indicator would not identify an outlier here. An important property of this approach as compared to a simpler approach (for example simply checking for deviations from a straight standing cylinder) is that it also suitable for leaning stems (which can occur in forests quite frequently).
 
-![Figure 22: Outlier indicator](Fig_22_outlier_indicator.svg)
+![Figure 22: Outlier indicator](figures/Fig_22_outlier_indicator.svg)
 
 **Figure 22: Outlier indicator.**
 
@@ -217,13 +217,13 @@ For Tree B - which contains a quite clear outlier stem section - we can see that
 
 The second quality indicator named *Q2(Sector Occupancy)* indicates whether for a given stem section, points were distributed around the complete stem disc ring. To assess this, the stem section ring is split up into equally sized sectors (default values are 16 sectors of 22.5°) and the algorithm checks how many of these segments contain points. It then stores the corresponding value as a percentage (Figure 23).
 
-![Figure 23: Sector occupancy](Fig_23.png)
+![Figure 23: Sector occupancy](figures/Fig_23.png)
 
 **Figure 23: Sector occupancy.**
 
 The values given in the Excel sheet represent the percentage of sections containing points (Figure 24).
 
-![Figure 24: Sector occupancy sheet](Fig_24.png)
+![Figure 24: Sector occupancy sheet](figures/Fig_24.png)
 
 **Figure 24: Sector occupancy sheet.**
 
@@ -231,7 +231,7 @@ Finally, the last quality indicator *Q3(Points Inner Circle)* is the number of p
 
 It is important to understand that in this case, the higher the number of points within the ring, the lower the probability that the stem section was correctly identified as the assumption is that you cannot have points reflected from within the tree stem (but only from the outside, the bark of the tree).  As you can see in Figure 25, we observe a value of 0 for most tree stem sections in the Excel sheet.
 
-![Figure 25: Point within circle](Fig_25.png)
+![Figure 25: Point within circle](figures/Fig_25.png)
 
 **Figure 25: Point within circle.**
 
@@ -241,7 +241,7 @@ With the information provided above you should now be able handle the 3DFin work
 
 However, in some cases, you might not reach a completely satisfying result with these settings alone, or may want to reduce the processing time. In those cases, the advanced parameters in the second tab of the graphical user interface of the 3DFin workflow provide some additional options to adapt the workflow parameters (Figure 26).
 
-![Figure 26: Advanced Parameter settings](Fig_26.png)
+![Figure 26: Advanced Parameter settings](figures/Fig_26.png)
 
 **Figure 26: Advanced Parameter settings.**
 
@@ -273,13 +273,13 @@ This dataset was collected with a GeoSlam Horizon Mobile Laser Scanning (MLS) sy
 A visualization of the dataset after loading it to CloudCompare can be seen in Figure 27.
 
 
-![Figure 27: MLS dataset in CloudCompare](Fig_27.png)
+![Figure 27: MLS dataset in CloudCompare](figures/Fig_27.png)
 
 **Figure 27: MLS dataset in CloudCompare.**
 
 If you **download the dataset** and then run the 3DFin work-flow (either with the standard settings or slightly adapting the basic parameters) you'll encounter something like this:
 
-![Figure 28: Standard outputs of the 3Dfin workflow applied to the MLS dataset ](Fig_28.png)
+![Figure 28: Standard outputs of the 3Dfin workflow applied to the MLS dataset ](figures/Fig_28.png)
 **Figure 28: Standard outputs of the 3Dfin workflow applied to the MLS dataset.**
 
 (A minimum height of 1.2 m and a maximum height of 4.2 m were selected. Other parameters were left untouched).
@@ -288,19 +288,19 @@ If you **download the dataset** and then run the 3DFin work-flow (either with th
 
 So the results seem to be not as good as we have observed for the first dataset. Let us explore some more what the reason for this could be. If we have a look at only the DTM (Fig. 29) we can see that there are some odd-looking parts in the DTM (marked in red in Fig. 29). 
 
-![Figure 29: DTM visualization](Fig_29.png)
+![Figure 29: DTM visualization](figures/Fig_29.png)
 
 **Figure 28: DTM visualization.**
 
 If we additionally activate the point-cloud we can see that the interpolated DTM in some parts notable deviates from the point cloud (Fig. 30 marked in red). Please be aware that the visualization settings have been adjusted a bit (increased the point size of the DTM and changed the color-scale to "grey" for the point cloud) to make these problems a bit better visible.
 
-![Figure 30: Mismatch between DTM and point cloud](Fig_30.png)
+![Figure 30: Mismatch between DTM and point cloud](figures/Fig_30.png)
 
 **Figure 30: Mismatch between DTM and point cloud.**
 
 If we add to the visualization the detected tree stem segments in the stripe (see Section I of the tutorial above) we can also see that the workflow missed several trees during the stem detection phase (marked in Figure 31).
 
-![Figure 31: Several trees were not detected](Fig_31.png)
+![Figure 31: Several trees were not detected](figures/Fig_31.png)
 
 **Figure 31: Several trees were not detected.**
 
@@ -311,24 +311,24 @@ We will now try to fix this by changing the so called "cloth resolution" in the 
 For this, we restart the 3DFin workflow and use the exactly same basic settings as in the run before but before we press the "compute" button, we **change the "Cloth resolution" to 0.4 m** (marked in red in Fig. 32) and then press **"Compute".**
 
 
-![Figure 32: Change the cloth resolution.](Fig_32.png)
+![Figure 32: Change the cloth resolution.](figures/Fig_32.png)
 
 **Figure 32: Change the cloth resolution.**
 
 The DTM obtained with these new settings looks notably better than the outputs of the first run. In a transect view (Fig. 33) it is nicely visible that the terrain model now smoothly follows the shape of the ground shown in the original point cloud.
 
-![Figure 33: The DTM now matches the point cloud nicely.](Fig_33.png)
+![Figure 33: The DTM now matches the point cloud nicely.](figures/Fig_33.png)
 **Figure 33: The DTM now matches the point cloud nicely.**
 
 We furthermore can see in the console outputs as well as in the tabular output data that the number of detected trees has increased from 57 to 70. A visual screening confirms that all trees have now been detected (Fig. 34). 
 
-![Figure 34: Stems are now well detected.](Fig_34.png)
+![Figure 34: Stems are now well detected.](figures/Fig_34.png)
 
 **Figure 35: Stems are now well detected.**
 
 We can also see that in the standard outputs of the workflow or by activating the "tree locator" layer in the DB tree window of CloudCompare that most of the trees now also have an estimate of the DBH. 
 
-![Figure 35: Standard output view of 3DFin after adjusting the cloth setting.](Fig_35.png)
+![Figure 35: Standard output view of 3DFin after adjusting the cloth setting.](figures/Fig_35.png)
 
 **Figure 35: Standard output view of 3DFin after adjusting the cloth setting.**
 
