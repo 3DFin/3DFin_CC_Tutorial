@@ -107,7 +107,7 @@ Once the work-flow as terminated, you will see some new outputs in the CloudComp
 
 In the following we will have a look at each of the outputs individually which is helpful to understand how the 3DFin work-flow works. 
 
-The first step in work-flow is to normalize the pointcloud and derive a digital terrain model (DTM). Figure 9 shows the visualization of the DTM of the example dataset as represented by a point cloud of the ground points. In this case the extracted DTM looks quite plausible. There might be other situation where the automatically derived DTM is not of sufficient quality. We will have a look at this issue in one of the exercises provided as supplement to this tutorial.
+The first step in work-flow is to normalize the pointcloud and derive a digital terrain model (DTM). Figure 9 shows the visualization of the DTM of the example dataset as represented by a point cloud of the ground points. In this case the extracted DTM looks quite plausible. There might be other situation where the automatically derived DTM is not of sufficient quality. We will have a look at this issue in one of the cases explained later.
 
 ![Figure 9: DTM derived in the 3DFin work-flow](Fig_9_dtm.png)
 
@@ -276,8 +276,6 @@ A visualization of the dataset after loading it to CloudCompare can be seen in F
 ![Figure 27: MLS dataset in CloudCompare](Fig_27.png)
 
 **Figure 27: MLS dataset in CloudCompare.**
-
-**Exercise 1:**
 
 If you **download the dataset** and then run the 3DFin work-flow (either with the standard settings or slightly adapting the basic parameters) you'll encounter something like this:
 
