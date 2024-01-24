@@ -1,4 +1,5 @@
-﻿- [3DFin CloudCompare tutorial](#3dfin-cloudcompare-tutorial)
+﻿# 3DFin CloudCompare tutorial
+- [3DFin CloudCompare tutorial](#3dfin-cloudcompare-tutorial)
   - [Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds](#getting-started-with-3dfin-plugin-to-extract-individual-tree-information-from-terrestrial-point-clouds)
     - [Requirements to run this tutorial](#requirements-to-run-this-tutorial)
     - [Starting 3DFin in CloudCompare](#starting-3dfin-in-cloudcompare)
@@ -8,9 +9,6 @@
     - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
   - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
     - [Modify cloth resolution to improve results](#modify-cloth-resolution-to-improve-results)
-
-
-# 3DFin CloudCompare tutorial
 
 ## Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds
 
