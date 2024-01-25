@@ -1,4 +1,14 @@
 ﻿# 3DFin CloudCompare tutorial
+- [3DFin CloudCompare tutorial](#3dfin-cloudcompare-tutorial)
+  - [Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds](#getting-started-with-3dfin-plugin-to-extract-individual-tree-information-from-terrestrial-point-clouds)
+    - [Requirements to run this tutorial](#requirements-to-run-this-tutorial)
+    - [Starting 3DFin in CloudCompare](#starting-3dfin-in-cloudcompare)
+    - [Running the 3DFin workflow in the Basic mode](#running-the-3dfin-workflow-in-the-basic-mode)
+    - [Understanding the 3DFin workflow outputs](#understanding-the-3dfin-workflow-outputs)
+    - [Tabular output data](#tabular-output-data)
+    - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
+  - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
+    - [Modify cloth resolution to improve results](#modify-cloth-resolution-to-improve-results)
 
 ## Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds
 
@@ -10,7 +20,7 @@ Goals:
 
 ### Requirements to run this tutorial
 
-This tutorial uses real world data to showcase its contents. It is detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
+This tutorial uses real world data to showcase its contents. Its detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
 
 [Download CloudCompare](https://www.danielgm.net/cc/release/) 
 
@@ -99,7 +109,7 @@ You will be continuously updated on the progress in the console window at the bo
 
 The duration to run the whole process of identifying and segmenting the tree trunks can take anything from a few seconds up to several minutes depending on the size of the applied dataset, the user-defined settings and the applied hardware. Typically, very long processing times (several hours) are not expected since the process is limited by the available memory and too large datasets cannot be processed in the current version. With the example dataset used in this Tutorial the processing takes approximately 5-10 min with a laptop with good (but not top-notch) performance (for example with my laptop with an i7 CPU and 16 GB RAM it takes around 7-8 minutes).
 
-### Understanding the 3D Fin workflow outputs
+### Understanding the 3DFin workflow outputs
 
 Once the work-flow as terminated, you will see some new outputs in the CloudCompare DB tree window as shown in Figure 8 (marked with 1). By default, three of the in total 7 output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem section circular tree rings, the diameter at breast height and the tree height.
 
