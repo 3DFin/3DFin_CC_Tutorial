@@ -31,7 +31,7 @@ The first dataset that will be used during the tutorial is available here:
 
 [TLS dataset used in this tutorial](https://drive.google.com/file/d/1Dexdy0uVf58Nh7TfX1srp9FMJ9HrrxME/view?usp=sharing)
 
-It is a terrestrial point cloud (TLS) from a pine stand (*Pinus sylvestris*) in a forest in Brandenburg, Germany. This point cloud was collected by Amelie Naderi and Hannes Bluhm of the Freie Universität Berlin with a Riegl vz400i in summer 2022.
+It is a terrestrial point cloud from a pine stand (*Pinus sylvestris*) in a forest in Brandenburg, Germany. This point cloud was collected by Amelie Naderi and Hannes Bluhm of the Freie Universität Berlin with a Riegl vz400i in summer 2022.
 
 ### Starting 3DFin in CloudCompare
 
@@ -383,9 +383,9 @@ If we open the file in a text editor we will see that it contains the default va
 1. The name of the file is "3DFinconfig"
 2. The format of the file is ".ini"
 3. The internal structure of the file is exactly the same as the example file (except the values of the parameters).
-4. The file is placed in the same than 3DFin.exe.
+4. The file is placed in the same directory than 3DFin.exe.
 
-This file is organized in sections, that follow the same structure as 3DFin' tabs: *basic*, *advanced* and *expert*. Let's break down the basic section to see how we can modify its values correctly. It's contents are the following:
+This file is organized in sections, that follow the same structure as 3DFin' tabs: *basic*, *advanced* and *expert*. Let's break down the basic section to see how we can modify its values correctly. Its contents are the following:
 
 ```
 [basic]
@@ -414,7 +414,7 @@ Knowing this, let's modify the config file in a way that adjusts better to the e
 
 ![Figure 37: Modified 3DFinconfig.ini file.](figures/Fig_37.png)
 
-If we now place the configuration file in the same directory where 3DFin.exe is located, everytime we open the program the default parameters will match those in the configuration file. Fig. 38 shows this.
+If we now place the configuration file in the directory where 3DFin.exe is located, everytime we open the program the default parameters will match those in the configuration file. Fig. 38 shows this.
 
 ![Figure 38: Left: the 3DFinconfig.ini modified as in Fig. 37 placed in the same directory as 3DFin.exe. Right: 3DFin displaying the default parameters contained in 3DFinconfig.ini.](figures/Fig_38.png)
 
