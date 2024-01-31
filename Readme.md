@@ -1,19 +1,19 @@
 ﻿# 3DFin tutorial
 - [3DFin tutorial](#3dfin-tutorial)
-  - [Getting started with 3DFin to extract individual tree information from terrestrial point clouds using CloudCompare plugin](#getting-started-with-3dfin-to-extract-individual-tree-information-from-terrestrial-point-clouds-using-cloudcompare-plugin)
+  - [Getting started with 3DFin using CloudCompare plugin](#getting-started-with-3dfin-using-cloudcompare-plugin)
     - [Requirements to run this tutorial](#requirements-to-run-this-tutorial)
     - [Starting 3DFin in CloudCompare](#starting-3dfin-in-cloudcompare)
-    - [Running the 3DFin workflow in the Basic mode](#running-the-3dfin-workflow-in-the-basic-mode)
+    - [Running 3DFin with default settings](#running-3dfin-with-default-settings)
     - [Understanding the 3DFin workflow outputs](#understanding-the-3dfin-workflow-outputs)
     - [Tabular output data](#tabular-output-data)
     - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
   - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
     - [Modify cloth resolution to improve results](#modify-cloth-resolution-to-improve-results)
   - [Case II - defining default settings](#case-ii---defining-default-settings)
-    - [Modify 3DFinconfig.ini file to define default settings (STANDALONE EXCLUSIVE)](#modify-3dfinconfigini-file-to-define-default-settings-standalone-exclusive)
+    - [Modify 3DFinconfig.ini file to define default settings](#modify-3dfinconfigini-file-to-define-default-settings)
     - [Output config.ini file](#output-configini-file)
 
-## Getting started with 3DFin to extract individual tree information from terrestrial point clouds using CloudCompare plugin
+## Getting started with 3DFin using CloudCompare plugin
 
 Goals:
 
@@ -77,7 +77,7 @@ We will now start the 3DFin plugin by first **selecting the loaded point-cloud i
 
 This will open the 3DFin plugin and its main window as shown in Fig. 6.
 
-### Running the 3DFin workflow in the Basic mode
+### Running 3DFin with default settings
 
 ![Figure 6: The 3DFin user interface in CloudCompare](figures/Fig_06.png)
 
@@ -356,7 +356,7 @@ This option can also be used to reduce processing time: In case you have already
 
 ## Case II - defining default settings
 
-### Modify 3DFinconfig.ini file to define default settings (STANDALONE EXCLUSIVE)
+### Modify 3DFinconfig.ini file to define default settings
 
 **This functionality is currently only available in 3DFin's standalone and python package versions.**
 
