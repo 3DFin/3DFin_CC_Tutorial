@@ -9,6 +9,9 @@
     - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
   - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
     - [Modify cloth resolution to improve results](#modify-cloth-resolution-to-improve-results)
+  - [Case II - defining default settings](#case-ii---defining-default-settings)
+    - [Modify 3DFinconfig.ini file to define default settings (STANDALONE EXCLUSIVE)](#modify-3dfinconfigini-file-to-define-default-settings-standalone-exclusive)
+    - [Output config.ini file](#output-configini-file)
 
 ## Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds
 
@@ -350,3 +353,79 @@ If you fail to obtain a high quality DTM using the algorithm integrated in 3DFin
 In this case you would **uncheck the "Normalize point cloud" box** in the Basic-tab of the 3DFin user interface. By unchecking the box, the drop-down menu "Normalized Height Field Name" will be activated and you will have to **select the attribute name** of the data column that includes the normalized height values of the point-cloud. After this, you can run the workflow as learned before.
 
 This option can also be used to reduce processing time: In case you have already run the 3DFin workflow successfully one time and the quality of the DTM was good, you can re-use the point-cloud created by the 3DFin workflow for this purposes. Each point cloud created by the 3DFin workflow contains a normalized height field and can hence be directly put into the workflow again without the need to normalize the point cloud again. One situation in which you could be interested in this is if you want to for example check how the outputs of the workflow is influenced by changing some of the settings in the "Advanced"-tab of the 3DFin user interface.
+
+## Case II - defining default settings
+
+### Modify 3DFinconfig.ini file to define default settings (STANDALONE EXCLUSIVE)
+
+**This functionality is currently only available in 3DFin's standalone and python package versions.**
+
+3DFin comes with a set of predefined values for the parameters that are modifiable in the software. Although these values have been selected by the developers to fit "standard" forest plots, users will probably find configuration settings that fit better to their datasets. 
+
+There is an easy way to modify the default values of the parameters through the *configuration file* of 3DFin. This can save some time, specially if you find yourself changing the parameters frequently to a set that you already know works better for your data.
+
+**Let's see this with an example.**
+
+We will use the the same dataset as in **Case I - adjusting DTM interpolation settings**, which can be downloaded here:
+
+[GeoSlam point cloud](https://drive.google.com/file/d/1LEx7WtGt4IHm17KbmbvnFega2jIwXJD6/view?usp=sharing)
+
+The configuration file (3DFinconfig.ini) itself is downloadable from here:
+
+[3DFin configuration file](https://github.com/3DFin/3DFin/blob/main/src/three_d_fin/3DFinconfig.ini)
+
+If we open the file in a text editor we will see that it contains the default values of 3DFin. This is shown in Fig. 36:
+
+![Figure 36: Contents of 3DFinconfig.ini. It stores the default values used by 3DFin.](figures/Fig_36.png)
+
+3DFin stores internally a copy of the values contained in this file, which allows the program to work properly even if no configuration file is present. However, **if a configuration file with the same structure as 3DFinconfig.ini is placed in the input directory of 3DFin, the program will attempt to read the default values from it.** For this configuration file to work, it must meet the following rules:
+
+1. The name of the file is "3DFinconfig"
+2. The format of the file is ".ini"
+3. The internal structure of the file is exactly the same as the example file (except the values of the parameters).
+4. The file is placed in the same than 3DFin.exe.
+
+This file is organized in sections, that follow the same structure as 3DFin' tabs: *basic*, *advanced* and *expert*. Let's break down the basic section to see how we can modify its values correctly. It's contents are the following:
+
+```
+[basic]
+# General comment about z0_name parameter.
+z0_name=Z0
+# General comment about upper_limit parameter.
+upper_limit=3.5
+# General comment about lower_limit parameter.
+lower_limit=0.7
+# General comment about number_of_iterations=2
+ parameter.
+number_of_iterations=2
+#General comment about res_cloth parameter.
+res_cloth=0.7
+```
+
+The very first line only contains **\[basic\]**. This determines the beggining of "basic" section. It's very important that this line is not modified, as it is what 3DFin uses to recognize that basic parameters will be declared below. The second line, starting with "#" is ignored by 3DFin, and only contains a short comment describing the contents of the parameters. You can leave it as it is, modify it or completely remove it; this won't have an effect. Thirdly, we have:
+
+```
+z_name=Z0
+```
+
+This line determines the default value (**"Z0"**) of the first parameter (**"z0_name"**) of the Basic tab of 3DFin. "z0_name" is the name that 3DFin recognizes internally for the first parameter of the basic tab. This can't be modified. However, "Z0" is its default value, and that is what you would modify.
+
+Knowing this, let's modify the config file in a way that adjusts better to the example point cloud "geoslam_stand.las". In **Case I**, we found that changing "Stripe Upper Limit" from 3.5 m to 4.2 m, "Stripe Lower Limit" from 0.7 m to 1.2 m and "Cloth resolution" from 0.7 m to 0.4 m produced better results. We can modify those as depicted in Fig. 37:
+
+![Figure 37: Modified 3DFinconfig.ini file.](figures/Fig_37.png)
+
+If we now place the configuration file in the same directory where 3DFin.exe is located, everytime we open the program the default parameters will match those in the configuration file. Fig. 38 shows this.
+
+![Figure 38: Left: the 3DFinconfig.ini modified as in Fig. 37 placed in the same directory as 3DFin.exe. Right: 3DFin displaying the default parameters contained in 3DFinconfig.ini.](figures/Fig_38.png)
+
+Whenever this happens, 3DFin will prompt a message in the console confirming that a configuration file has been found. This is shown in Fig. 39.
+
+![Figure 39: 3DFin console showing that a configuration file has been found.](figures/Fig_39.png)
+
+### Output config.ini file
+
+A last tip about 3DFin configuration files: If you process a point cloud with 3DFin, you will find a copy of the configuration file in the output directory, but this will have a different name than "3DFinconfig.ini". This is illustrated in Fig. 40.
+
+![Figure 40: Example output directory of 3DFin after processing geoslam_stand.las, where a config file has been generated (geoslam_stand_config.ini).](figures/Fig_40.png)
+
+3DFin always produces a configuration file that saves the settings used during the run. This file's name will be the name of the input point cloud + \[_config\]. If you found a set of parameters that suits well your dataset, you can always rename this file to "3DFinconfig", and it will update the default values of 3DFin to that better set of values!
