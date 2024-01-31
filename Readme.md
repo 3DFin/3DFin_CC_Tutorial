@@ -1,53 +1,56 @@
-﻿# 3DFin CloudCompare tutorial
-- [3DFin CloudCompare tutorial](#3dfin-cloudcompare-tutorial)
-  - [Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds](#getting-started-with-3dfin-plugin-to-extract-individual-tree-information-from-terrestrial-point-clouds)
+﻿# 3DFin tutorial
+- [3DFin tutorial](#3dfin-tutorial)
+  - [Getting started with 3DFin using CloudCompare plugin](#getting-started-with-3dfin-using-cloudcompare-plugin)
     - [Requirements to run this tutorial](#requirements-to-run-this-tutorial)
     - [Starting 3DFin in CloudCompare](#starting-3dfin-in-cloudcompare)
-    - [Running the 3DFin workflow in the Basic mode](#running-the-3dfin-workflow-in-the-basic-mode)
-    - [Understanding the 3DFin workflow outputs](#understanding-the-3dfin-workflow-outputs)
+    - [Running 3DFin with default settings](#running-3dfin-with-default-settings)
+    - [Understanding 3DFin point cloud outputs](#understanding-3dfin-point-cloud-outputs)
     - [Tabular output data](#tabular-output-data)
     - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
   - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
     - [Modify cloth resolution to improve results](#modify-cloth-resolution-to-improve-results)
+  - [Case II - defining default settings](#case-ii---defining-default-settings)
+    - [Modify 3DFinconfig.ini file to define default settings](#modify-3dfinconfigini-file-to-define-default-settings)
+    - [Output config.ini file](#output-configini-file)
 
-## Getting started with 3DFin plugin to extract individual tree information from terrestrial point clouds
+## Getting started with 3DFin using CloudCompare plugin
 
 Goals:
 
-- To understand the basic concepts behind the 3DFin workflow
+- To understand the basic concepts behind 3DFin workflow
 - To learn how to use 3DFin software to extract individual trees from a 3D point cloud
 - To understand what the outputs of the 3DFin workflow mean
 
 ### Requirements to run this tutorial
 
-This tutorial uses real world data to showcase its contents. Its detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin plugin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
+This tutorial uses real world data to showcase its contents. Its detailed enough to follow along just by reading it, but you can always replicate its contents in your own pc downloading the data and processing them in 3DFin. To do so, you will need a recent version of CloudCompare that incorporates 3DFin plugin. You can download a zip-file containing a running version for Windows here:
 
 [Download CloudCompare](https://www.danielgm.net/cc/release/) 
 
-The first dataset that is used during the tutorial is available here:
+The first dataset that will be used during the tutorial is available here:
 
 [TLS dataset used in this tutorial](https://drive.google.com/file/d/1Dexdy0uVf58Nh7TfX1srp9FMJ9HrrxME/view?usp=sharing)
 
-It is a terrestrial laserscan (TLS) from a pine stand (*Pinus sylvestris*) in a forest in Brandenburg, Germany. This point cloud was collected by Amelie Naderi and Hannes Bluhm of the Freie Universität Berlin with a Riegl vz400i in summer 2022.
+It is a terrestrial point cloud from a pine stand (*Pinus sylvestris*) in a forest in Brandenburg, Germany. This point cloud was collected by Amelie Naderi and Hannes Bluhm of the Freie Universität Berlin with a Riegl vz400i in summer 2022.
 
 ### Starting 3DFin in CloudCompare
 
-**Download CloudCompare installer, unpack it onto a folder** on your computer which you are able to find again and then **run CloudCompare by double-blicking the "CloudCompare.exe"** in the main file folder. You can skip this part if you already have an installation of CloudCompare's most recent version. 
+**Download CloudCompare installer, unpack it onto a folder** on your computer that you can find again and then **run CloudCompare by double-blicking the "CloudCompare.exe"** in the main file folder. You can skip this part if you already have an installation of CloudCompare's most recent version. 
 
-This should lead to a situation as shown in Figure 1.
+This should lead to a situation as shown in Fig. 1.
 
 ![Figure 1: CloudCompare with 3DFin extension installed](figures/Fig_01.png)
 **Figure 1: CloudCompare with 3DFin extension installed.**
 
-Your actual view is likely to appear a bit different since you might have other and additional toolbars activated. You might have to press on a little arrow-button on the top right of the menu bar to be able to see the relevant icons which are marked in Figure 1.
+Your actual view is likely to appear a bit different since you might have other and additional toolbars activated. You might have to press on a little arrow-button on the top right of the menu bar to be able to see the relevant icons which are marked in Fig. 1.
 
-We are now ready to open our example dataset and start working with the 3DFin plugin. To open the dataset, we select **File => Open**  (Figure 2) and then in the new window browse to the ***pointcloud_pines_brandenburg.las*** file, select it and press **"Open"**.
+We are now ready to open our example dataset and start working with the 3DFin plugin. To open the dataset, we select **File -> Open**  (Fig. 2) and then in the new window browse to the ***pointcloud_pines_brandenburg.las*** file, select it and press **"Open"**.
 
 ![Figure 2: Open the example dataset](figures/Fig_02.png)
 
 **Figure 2: Open the example dataset.**
 
-In the then appearing dialogue we use the standard settings to open the file. That is, in the first window we press **"Apply All"** (Figure 3) and in the second window **"Yes to All"** (Figure 4).
+We will use the standard settings of CloudCompare to open the file. That is, in the first window we press **"Apply All"** (Fig. 3) and in the second window **"Yes to All"** (Fig. 4).
 
 
 ![Figure 3: The open dataset dialogue in CloudCompare 1/2](figures/Fig_03.png)
@@ -58,7 +61,7 @@ In the then appearing dialogue we use the standard settings to open the file. Th
 
 **Figure 4: The open dataset dialogue in CloudCompare 2/2.**
 
-This should result in a situation as shown in Figure 5
+This should result in a situation as shown in Fig. 5:
 
 
 ![Figure 5: CloudCompare view after loading the example dataset](figures/Fig_05.png)
@@ -70,11 +73,11 @@ If you want to adjust some basic visualization settings of the point cloud you c
 
 However, given that our example dataset comes with some RGB information, the standard visualization setting should already be quite acceptable.
 
-We will now start the 3DFin plugin by first **selecting the loaded point-cloud in the DB Tree window** of Cloud Compare (marked with 1 in Figure 5) and then **click the drop-down menu "Plugins" and select "3D Forest Inventories"** (marked with 2 in Figure 5).
+We will now start the 3DFin plugin by first **selecting the loaded point-cloud in the DB Tree window** of CloudCompare (marked with 1 in Fig. 5) and then **click the drop-down menu "Plugins" and select "3D Forest Inventories"** (marked with 2 in Fig. 5).
 
-This will open the 3DFin plugin and its main window as shown in Figure 6.
+This will open the 3DFin plugin and its main window as shown in Fig. 6.
 
-### Running the 3DFin workflow in the Basic mode
+### Running 3DFin with default settings
 
 ![Figure 6: The 3DFin user interface in CloudCompare](figures/Fig_06.png)
 
@@ -107,36 +110,36 @@ You will be continuously updated on the progress in the console window at the bo
 ![Figure 7: Progress of the 3DFin work-flow in the console window](figures/07.png)
 **Figure 7: Progress of the 3DFin work-flow in the console window.**
 
-The duration to run the whole process of identifying and segmenting the tree trunks can take anything from a few seconds up to several minutes depending on the size of the applied dataset, the user-defined settings and the applied hardware. Typically, very long processing times (several hours) are not expected since the process is limited by the available memory and too large datasets cannot be processed in the current version. With the example dataset used in this Tutorial the processing takes approximately 5-10 min with a laptop with good (but not top-notch) performance (for example with my laptop with an i7 CPU and 16 GB RAM it takes around 7-8 minutes).
+Running 3DFin on a point cloud can take anything from a few seconds up to several minutes depending on the size of the point cloud, the user-defined settings and the hardware. Typically, very long processing times (several hours) are not expected, since the process is limited by the available memory: too large datasets cannot be processed in the current version of the software. With the example dataset used in this Tutorial the processing time is approximately 5-10 min with a laptop with good (but not top-notch) performance (16 GB RAM, Intel i7 or similar).
 
-### Understanding the 3DFin workflow outputs
+### Understanding 3DFin point cloud outputs
 
-Once the work-flow as terminated, you will see some new outputs in the CloudCompare DB tree window as shown in Figure 8 (marked with 1). By default, three of the in total 7 output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem section circular tree rings, the diameter at breast height and the tree height.
+Once the program has finished, you will see some new outputs in the CloudCompare DB tree window as shown in Fig. 8 (marked with 1). By default, three of the seven output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem sections, the diameter at breast height and the total tree height.
 
-![Figure 8: Outputs of the 3DFin work-flow](figures/Fig_08.png)
+![Figure 8: Outputs of the 3DFin workflow](figures/Fig_08.png)
 
-**Figure 8: Outputs of the 3DFin work-flow.**
+**Figure 8: Outputs of the 3DFin workflow.**
 
-In the following we will have a look at each of the outputs individually which is helpful to understand how the 3DFin work-flow works. 
+Next, we will have a look at each of the outputs individually, which will be helpful to understand how the 3DFin workflow works. 
 
-The first step in work-flow is to normalize the pointcloud and derive a digital terrain model (DTM). Figure 9 shows the visualization of the DTM of the example dataset as represented by a point cloud of the ground points. In this case the extracted DTM looks quite plausible. There might be other situation where the automatically derived DTM is not of sufficient quality. We will have a look at this issue in one of the cases explained later.
+The first step in workflow is to normalize the point cloud and derive a digital terrain model (DTM). Fig. 9 shows the visualization of the DTM fitted to the example dataset. In this case the extracted DTM looks quite plausible. There might be other situation where the automatically derived DTM is not of sufficient quality. We will have a look at this issue in one of the cases explained later (Case I).
 
-![Figure 9: DTM derived in the 3DFin work-flow](figures/Fig_9_dtm.png)
+![Figure 9: DTM derived in the 3DFin workflow](figures/Fig_9_dtm.png)
 
-**Figure 9: DTM derived in the 3DFin work-flow.**
+**Figure 9: DTM derived in the 3DFin workflow.**
 
-In figure 10, we can see the identified tree segments from the second step of the 3DFin work-flow during which point-cloud patterns showing a vertical continuity are identified in the user-defined height range (see stripe range setting above). In our case, all of these tree segments will be displayed for the height between 1.5 m and 4.5 m.
+In Fig. 10, we can see the identified tree segments from the second step of the 3DFin workflow. Clusters of points showing a vertical continuity are identified in the user-defined height range (see stripe range setting above). In our case, all of these tree segments will be displayed for the height between 1.5 m and 4.5 m.
 
 ![Figure 10: Tree segments identified by the 3DFin workflow](figures/Fig_10_stem_segments.png)
 **Figure 10: Tree segments identified by the 3DFin workflow.**
 
-As next step in the workflow an axis is fitted through the centers of the tree section discs shown in Figure 10. This step is accomplished by deriving the 1st axis of a Principal Component Analysis using the 3D-positions of the identified tree stem section centers as input. These fitted axes are then used as orientation for the circle-fitting algorithm. That is, along this axes, the algorithm will search for circular shapes, representing points reflected by the tree stem, within a circular buffer with a (optionally user-defined) fixed radius around the axis.  This step will repeated in regular (optionally user-defined) height intervals. The axes for our example dataset are shown in Figure 11 and the respective circle fitting output is shown in Figure 12.
+As next step in the workflow an axis is fitted through the centers of the tree section discs shown in Fig. 10. This step is accomplished by deriving the 1st axis of a Principal Component Analysis using the 3D-positions of the identified tree stem section centers as input. These fitted axes are then used as orientation for the circle-fitting algorithm. That is, along this axes, the algorithm will search for circular shapes, representing points reflected by the tree stem, within a circular buffer with a (optionally user-defined) fixed radius around the axis.  This step will repeated in regular (optionally user-defined) height intervals. The axes for our example dataset are shown in Fig. 11 and the respective circle fitting output is shown in Fig. 12.
 
 ![Figure 11: Axes fitted from the tree stem segments](figures/Fig_11_axes.png)
 
 **Figure 11: Axes fitted from the tree stem segments.**
 
-The axes (in Figure 11) are color-coded according to their tilting angle and you can see that axes that show a higher tilting relative to the other trees (that is, deviating notably from the average vertical orientation of a tree stems in the dataset) are shown in red. This is not necessarily an indicator for wrongly identified tree stems as trees sometimes are leaning but it might be a good idea to visually re-examine such trees by comparing the identified stem sections with the point cloud.
+The axes (in Fig. 11) are color-coded according to their tilting angle and you can see that axes that show a higher tilting relative to the other trees (that is, deviating notably from the average vertical orientation of a tree stems in the dataset) are shown in red. This is not necessarily an indicator for wrongly identified tree stems as trees sometimes are leaning but it might be a good idea to visually re-examine such trees by comparing the identified stem sections with the point cloud.
 
 ![Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11](figures/Fig_12_fitted_sections.png)
 **Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11.**
@@ -147,21 +150,21 @@ Similarly, fitted circles that show unexpected dimensions (for example a notably
 
 **Figure 13: Distance axes.**
 
-In Figure 13 you can see the original point cloud with point colors relating to the distance to the stem axes (as shown in Figure 11). In this example this means that points shown in blue are very close to an identified stem axis while points shown in red are more distant from all stem axes. This is a quite helpful illustration to check how successful the work-flow was in correctly identifying points belonging to tree trunks. In our example, the workflow has performed very well.
+In Fig. 13 you can see the original point cloud with point colors relating to the distance to the stem axes (as shown in Fig. 11). In this example this means that points shown in blue are very close to an identified stem axis while points shown in red are more distant from all stem axes. This is a quite helpful illustration to check how successful the work-flow was in correctly identifying points belonging to tree trunks. In our example, the workflow has performed very well.
 
-In Figure 14 the height of each detected tree is displayed. The height is defined as the height of the highest non-isolated point in a cylindrical region around the axes (Figure 11).
+In Fig. 14 the height of each detected tree is displayed. The height is defined as the height of the highest non-isolated point in a cylindrical region around the axes (Fig. 11).
 
 ![Figure 14: Tree height](figures/Fig_14_height.png)
 
 **Figure 14: Tree height.**
 
-Finally, in Figure 15, the diameter at breast height (DBH) of each tree is shown. The diameter at breast height is interpolated from the diameters of the fitted circles (Figure 12) above and below the DBH height of 1.3. In case there are no high-quality fitted circles available within a certain range above and below the 1.3 m position, the workflow will set the DBH of this tree to "non-reliable" instead of providing a diameter estimate.
+Finally, in Fig. 15, the diameter at breast height (DBH) of each tree is shown. The diameter at breast height is interpolated from the diameters of the fitted circles (Fig. 12) above and below the DBH height of 1.3. In case there are no high-quality fitted circles available within a certain range above and below the 1.3 m position, the workflow will set the DBH of this tree to "non-reliable" instead of providing a diameter estimate.
 
 ![Figure 15: Tree DBH](figures/Fig_15_tree_locationspng.png)
 
 **Figure 15: Tree DBH.**
 
-We now have had a look at all outputs of the 3DFin workflow within CloudCompare. If you want to keep a copy of these files, you have the option to save the CloudCompare project into a "Cloud Compare Entities" binary file by selecting all the files in the DB Tree window and then select **"File -> Save"** (Fig. 16). Select **"Cloud Compare Entities"** as file format and then browse to a folder where you want to save the project and click **"Save"**. You should now be able to re-load your current state with all files the next time you open CloudCompare by simply selecting **"File -> Open"** and then browse to the folder where you stored the file.
+We now have had a look at all outputs of the 3DFin workflow within CloudCompare. If you want to keep a copy of these files, you have the option to save the CloudCompare project into a "CloudCompare Entities" binary file by selecting all the files in the DB Tree window and then select **"File -> Save"** (Fig. 16). Select **"CloudCompare Entities"** as file format and then browse to a folder where you want to save the project and click **"Save"**. You should now be able to re-load your current state with all files the next time you open CloudCompare by simply selecting **"File -> Open"** and then browse to the folder where you stored the file.
 
 ![Figure 16: Tree DBH](figures/Fig_16_save_cc.png)
 
@@ -171,26 +174,26 @@ We have now completed the basic 3DFin workflow in CloudCompare and will have a c
 
 ### Tabular output data
 
-As first step, browse to the output folder which you defined in the CloudCompare work-flow window before starting the computations. Then open the Excel-File that was created as output of the workflow. You should see a situation as shown in Figure 17.
+As first step, browse to the output folder which you defined in the CloudCompare work-flow window before starting the computations. Then open the Excel-File that was created as output of the workflow. You should see a situation as shown in Fig. 17.
 
 ![Figure 17: Output Excel file](figures/Fig_17_excel1.png)
 
 **Figure 17: Output Excel file.**
 
-As you can see there are in total 9 separate sheets (marked with 1 in Figure 17) that contain all relevant results created by the 3DFin work-flow. In the following we will briefly explain the contents of each sheet.
+As you can see there are in total 9 separate sheets (marked with 1 in Fig. 17) that contain all relevant results created by the 3DFin work-flow. In the following we will briefly explain the contents of each sheet.
 
 *Plot Metrics*
-On the first sheet called "Plot Metrics" you find the total height (TH), the diameter at breast height (DBH) as well as the x-position (X) and y-position (Y) of each tree (T) identified in the point cloud (marked with 2 and 3 in Figure 17). In our example 30 trees were identified
+On the first sheet called "Plot Metrics" you find the total height (TH), the diameter at breast height (DBH) as well as the x-position (X) and y-position (Y) of each tree (T) identified in the point cloud (marked with 2 and 3 in Fig. 17). In our example 30 trees were identified
 
 *Diameters*
-In the diameters sheet you can find diameter of all stem section (columns) of all trees (rows) (Figure 18). The number of stem sections varies based on the height of the trees and you will see that as a consequence typically all trees will have several fields with 0 diameter in some higher stem section columns in the table.
+In the diameters sheet you can find diameter of all stem section (columns) of all trees (rows) (Fig. 18). The number of stem sections varies based on the height of the trees and you will see that as a consequence typically all trees will have several fields with 0 diameter in some higher stem section columns in the table.
 
 ![Figure 18: Diameter sheet](figures/18_excel2.png)
 
 **Figure 18: Diameter sheet.**
 
 *X*
-The X sheet contains the x-coordinates of the center points of all stem sections (columns) of all trees (rows) (Figure 19)
+The X sheet contains the x-coordinates of the center points of all stem sections (columns) of all trees (rows) (Fig. 19).
 
 ![Figure 19: X sheet](figures/Fig_19_excel3.png)
 
@@ -200,7 +203,7 @@ The X sheet contains the x-coordinates of the center points of all stem sections
 The Y sheet contains the y-coordinates of the center points of all stem sections (columns) of all trees (rows)
 
 *Sections*
-The Sections sheet shows the heights for which stem sections were determined (Figure 20). These values depend on the user-defined lowest section height and the selected height-interval. These values are the same for all trees an are hence only displayed once.
+The Sections sheet shows the heights for which stem sections were determined (Fig. 20). These values depend on the user-defined lowest section height and the selected height-interval. These values are the same for all trees an are hence only displayed once.
 
 ![Figure 20: Sections sheet](figures/Fig_20_excel4.png)
 
@@ -211,15 +214,15 @@ The next four sheets contain information on the quality of each stem section. Th
 
 **add explanation how binary layer is created**
 
-The  *Q1(Outlier Probability)* sheet contains a number for each stem segment of each trees  which indicates how likely it is that an identified segment is actually not part of the tree stem (as represented by all other tree segments of the same tree) (Figure 21).  The higher the value, the more likely that the given section is an outlier. 
+The  *Q1(Outlier Probability)* sheet contains a number for each stem segment of each trees  which indicates how likely it is that an identified segment is actually not part of the tree stem (as represented by all other tree segments of the same tree) (Fig. 21).  The higher the value, the more likely that the given section is an outlier. 
 
 ![Figure 21: Outlier Probability](figures/Fig_21_excel5.png)
 
 **Figure 21: Outlier Probability.**
 
-This indicator value bases on a calculation which is illustrated in Figure 22. To derive the indicator value, the inclination-angle the center of a given stem section disc with the centers of all other stem sections is calculated (see for example Tree A section 1 in Figure 22). Then, all of these inclination angles are summarized into one value. This step is then repeated for all stem section discs. 
+This indicator value bases on a calculation which is illustrated in Fig. 22. To derive the indicator value, the inclination-angle the center of a given stem section disc with the centers of all other stem sections is calculated (see for example Tree A section 1 in Fig. 22). Then, all of these inclination angles are summarized into one value. This step is then repeated for all stem section discs. 
 
-As shown in Figure 22, the inclination angles (symbolized by the arrows) of the visualized stem sections of Tree A (Section 1,2,3,7) are all very comparable and hence the indicator would not identify an outlier here. An important property of this approach as compared to a simpler approach (for example simply checking for deviations from a straight standing cylinder) is that it also suitable for leaning stems (which can occur in forests quite frequently).
+As shown in Fig. 22, the inclination angles (symbolized by the arrows) of the visualized stem sections of Tree A (Section 1,2,3,7) are all very comparable and hence the indicator would not identify an outlier here. An important property of this approach as compared to a simpler approach (for example simply checking for deviations from a straight standing cylinder) is that it also suitable for leaning stems (which can occur in forests quite frequently).
 
 ![Figure 22: Outlier indicator](figures/Fig_22_outlier_indicator.svg)
 
@@ -227,13 +230,13 @@ As shown in Figure 22, the inclination angles (symbolized by the arrows) of the 
 
 For Tree B - which contains a quite clear outlier stem section - we can see that for sections 1, 2 and 7, most of the arrows are still showing very comparable directions with only the arrow heading towards the outlier section showing a notably different angle. However, when we have a look at the arrows for the fifth segment from the bottom, we can see that the directions of the arrows are strongly variable for the outlier section which would then also be detected as an outlier by the indicator value. 
 
-The second quality indicator named *Q2(Sector Occupancy)* indicates whether for a given stem section, points were distributed around the complete stem disc ring. To assess this, the stem section ring is split up into equally sized sectors (default values are 16 sectors of 22.5°) and the algorithm checks how many of these segments contain points. It then stores the corresponding value as a percentage (Figure 23).
+The second quality indicator named *Q2(Sector Occupancy)* indicates whether for a given stem section, points were distributed around the complete stem disc ring. To assess this, the stem section ring is split up into equally sized sectors (default values are 16 sectors of 22.5°) and the algorithm checks how many of these segments contain points. It then stores the corresponding value as a percentage (Fig. 23).
 
 ![Figure 23: Sector occupancy](figures/Fig_23.png)
 
 **Figure 23: Sector occupancy.**
 
-The values given in the Excel sheet represent the percentage of sections containing points (Figure 24).
+The values given in the Excel sheet represent the percentage of sections containing points (Fig. 24).
 
 ![Figure 24: Sector occupancy sheet](figures/Fig_24.png)
 
@@ -241,7 +244,7 @@ The values given in the Excel sheet represent the percentage of sections contain
 
 Finally, the last quality indicator *Q3(Points Inner Circle)* is the number of points within an inner circle within the stem section ring. This inner ring is calculated based on the fitted stem section ring by creating a concentrical circle with half the diameter of the fitted circle as default value. Then, all the points in that section that fall within that inner circle are counted.
 
-It is important to understand that in this case, the higher the number of points within the ring, the lower the probability that the stem section was correctly identified as the assumption is that you cannot have points reflected from within the tree stem (but only from the outside, the bark of the tree).  As you can see in Figure 25, we observe a value of 0 for most tree stem sections in the Excel sheet.
+It is important to understand that in this case, the higher the number of points within the ring, the lower the probability that the stem section was correctly identified as the assumption is that you cannot have points reflected from within the tree stem (but only from the outside, the bark of the tree).  As you can see in Fig. 25, we observe a value of 0 for most tree stem sections in the Excel sheet.
 
 ![Figure 25: Point within circle](figures/Fig_25.png)
 
@@ -251,7 +254,7 @@ It is important to understand that in this case, the higher the number of points
 
 With the information provided above you should now be able handle the 3DFin workflow using the basic settings quite well. For comparably easy forest stands (that is homogeneous stands with little understorey and branching in the lower stem parts) and high quality laserscanning data you should be able to obtain reasonable results using only these basic settings.
 
-However, in some cases, you might not reach a completely satisfying result with these settings alone, or may want to reduce the processing time. In those cases, the advanced parameters in the second tab of the graphical user interface of the 3DFin workflow provide some additional options to adapt the workflow parameters (Figure 26).
+However, in some cases, you might not reach a completely satisfying result with these settings alone, or may want to reduce the processing time. In those cases, the advanced parameters in the second tab of the graphical user interface of the 3DFin workflow provide some additional options to adapt the workflow parameters (Fig. 26).
 
 ![Figure 26: Advanced Parameter settings](figures/Fig_26.png)
 
@@ -282,7 +285,7 @@ We will use a different dataset for this demonstration, which you can access her
 
 This dataset was collected with a GeoSlam Horizon Mobile Laser Scanning (MLS) system in a forest stand which has a more complex forest structure with more pronounced understorey and also a more complex terrain situation. Furthermore, the dataset is a bit more noisy. MLS systems typically have an increased noise level as compared to the TLS data.
 
-A visualization of the dataset after loading it to CloudCompare can be seen in Figure 27.
+A visualization of the dataset after loading it to CloudCompare can be seen in Fig. 27.
 
 ![Figure 27: MLS dataset in CloudCompare](figures/Fig_27.png)
 
@@ -303,7 +306,7 @@ So the results seem to be not as good as we have observed for the first dataset.
 
 **Figure 28: DTM visualization.**
 
-If we additionally activate the point-cloud we can see that the interpolated DTM in some parts notable deviates from the point cloud (Fig. 30 marked in red). Please be aware that the visualization settings have been adjusted a bit (increased the point size of the DTM and changed the color-scale to "grey" for the point cloud) to make these problems a bit better visible.
+If we additionally activate the point cloud we can see that the interpolated DTM in some parts notable deviates from the point cloud (Fig. 30, marked in red). Please be aware that the visualization settings have been adjusted a bit (increased the point size of the DTM and changed the color-scale to "grey" for the point cloud) to make these problems a bit better visible.
 
 ![Figure 30: Mismatch between DTM and point cloud](figures/Fig_30.png)
 
@@ -345,8 +348,84 @@ We can also see that in the standard outputs of the workflow or by activating th
 
 Checking the quality of the DTM is generally recommended at is one of the few variables that can affect the workflow negatively. 
 
-If you fail to obtain a high quality DTM using the algorithm integrated in 3DFin, but have managed to calculate a high-quality DTM in another software-environment (e.g., LAStools or FUSION), you can also provide an already normalized point-cloud file to 3DFin. 
+If you fail to obtain a high quality DTM using the algorithm integrated in 3DFin, but have managed to calculate a high-quality DTM in another software-environment (e.g., LAStools or FUSION), you can also provide an already normalized point cloud file to 3DFin. 
 
-In this case you would **uncheck the "Normalize point cloud" box** in the Basic-tab of the 3DFin user interface. By unchecking the box, the drop-down menu "Normalized Height Field Name" will be activated and you will have to **select the attribute name** of the data column that includes the normalized height values of the point-cloud. After this, you can run the workflow as learned before.
+In this case you would **uncheck the "Normalize point cloud" box** in the Basic-tab of the 3DFin user interface. By unchecking the box, the drop-down menu "Normalized Height Field Name" will be activated and you will have to **select the attribute name** of the data column that includes the normalized height values of the point cloud. After this, you can run the workflow as learned before.
 
-This option can also be used to reduce processing time: In case you have already run the 3DFin workflow successfully one time and the quality of the DTM was good, you can re-use the point-cloud created by the 3DFin workflow for this purposes. Each point cloud created by the 3DFin workflow contains a normalized height field and can hence be directly put into the workflow again without the need to normalize the point cloud again. One situation in which you could be interested in this is if you want to for example check how the outputs of the workflow is influenced by changing some of the settings in the "Advanced"-tab of the 3DFin user interface.
+This option can also be used to reduce processing time: In case you have already run the 3DFin workflow successfully one time and the quality of the DTM was good, you can re-use the point cloud created by the 3DFin workflow for this purposes. Each point cloud created by the 3DFin workflow contains a normalized height field and can hence be directly put into the workflow again without the need to normalize the point cloud again. One situation in which you could be interested in this is if you want to for example check how the outputs of the workflow is influenced by changing some of the settings in the "Advanced"-tab of the 3DFin user interface.
+
+## Case II - defining default settings
+
+### Modify 3DFinconfig.ini file to define default settings
+
+**This functionality is currently only available in 3DFin's standalone and python package versions.**
+
+3DFin comes with a set of predefined values for the parameters that are modifiable in the software. Although these values have been selected by the developers to fit "standard" forest plots, users will probably find configuration settings that fit better to their datasets. 
+
+There is an easy way to modify the default values of the parameters through the *configuration file* of 3DFin. This can save some time, specially if you find yourself changing the parameters frequently to a set that you already know works better for your data.
+
+**Let's see this with an example.**
+
+We will use the the same dataset as in **Case I - adjusting DTM interpolation settings**, which can be downloaded here:
+
+[GeoSlam point cloud](https://drive.google.com/file/d/1LEx7WtGt4IHm17KbmbvnFega2jIwXJD6/view?usp=sharing)
+
+The configuration file (3DFinconfig.ini) itself is downloadable from here:
+
+[3DFin configuration file](https://github.com/3DFin/3DFin/blob/main/src/three_d_fin/3DFinconfig.ini)
+
+If we open the file in a text editor we will see that it contains the default values of 3DFin. This is shown in Fig. 36:
+
+![Figure 36: Contents of 3DFinconfig.ini. It stores the default values used by 3DFin.](figures/Fig_36.png)
+
+3DFin stores internally a copy of the values contained in this file, which allows the program to work properly even if no configuration file is present. However, **if a configuration file with the same structure as 3DFinconfig.ini is placed in the input directory of 3DFin, the program will attempt to read the default values from it.** For this configuration file to work, it must meet the following rules:
+
+1. The name of the file is "3DFinconfig"
+2. The format of the file is ".ini"
+3. The internal structure of the file is exactly the same as the example file (except the values of the parameters).
+4. The file is placed in the same directory than 3DFin.exe.
+
+This file is organized in sections, that follow the same structure as 3DFin' tabs: *basic*, *advanced* and *expert*. Let's break down the basic section to see how we can modify its values correctly. Its contents are the following:
+
+```
+[basic]
+# General comment about z0_name parameter.
+z0_name=Z0
+# General comment about upper_limit parameter.
+upper_limit=3.5
+# General comment about lower_limit parameter.
+lower_limit=0.7
+# General comment about number_of_iterations=2
+ parameter.
+number_of_iterations=2
+#General comment about res_cloth parameter.
+res_cloth=0.7
+```
+
+The very first line only contains **\[basic\]**. This determines the beggining of "basic" section. It's very important that this line is not modified, as it is what 3DFin uses to recognize that basic parameters will be declared below. The second line, starting with "#" is ignored by 3DFin, and only contains a short comment describing the contents of the parameters. You can leave it as it is, modify it or completely remove it; this won't have an effect. Thirdly, we have:
+
+```
+z_name=Z0
+```
+
+This line determines the default value (**"Z0"**) of the first parameter (**"z0_name"**) of the Basic tab of 3DFin. "z0_name" is the name that 3DFin recognizes internally for the first parameter of the basic tab. This can't be modified. However, "Z0" is its default value, and that is what you would modify.
+
+Knowing this, let's modify the config file in a way that adjusts better to the example point cloud "geoslam_stand.las". In **Case I**, we found that changing "Stripe Upper Limit" from 3.5 m to 4.2 m, "Stripe Lower Limit" from 0.7 m to 1.2 m and "Cloth resolution" from 0.7 m to 0.4 m produced better results. We can modify those as depicted in Fig. 37:
+
+![Figure 37: Modified 3DFinconfig.ini file.](figures/Fig_37.png)
+
+If we now place the configuration file in the directory where 3DFin.exe is located, everytime we open the program the default parameters will match those in the configuration file. Fig. 38 shows this.
+
+![Figure 38: Left: the 3DFinconfig.ini modified as in Fig. 37 placed in the same directory as 3DFin.exe. Right: 3DFin displaying the default parameters contained in 3DFinconfig.ini.](figures/Fig_38.png)
+
+Whenever this happens, 3DFin will prompt a message in the console confirming that a configuration file has been found. This is shown in Fig. 39.
+
+![Figure 39: 3DFin console showing that a configuration file has been found.](figures/Fig_39.png)
+
+### Output config.ini file
+
+A last tip about 3DFin configuration files: If you process a point cloud with 3DFin, you will find a copy of the configuration file in the output directory, but this will have a different name than "3DFinconfig.ini". This is illustrated in Fig. 40.
+
+![Figure 40: Example output directory of 3DFin after processing geoslam_stand.las, where a config file has been generated (geoslam_stand_config.ini).](figures/Fig_40.png)
+
+3DFin always produces a configuration file that saves the settings used during the run. This file's name will be the name of the input point cloud + \[_config\]. If you found a set of parameters that suits well your dataset, you can always rename this file to "3DFinconfig", and it will update the default values of 3DFin to that better set of values!
