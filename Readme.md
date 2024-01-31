@@ -4,7 +4,7 @@
     - [Requirements to run this tutorial](#requirements-to-run-this-tutorial)
     - [Starting 3DFin in CloudCompare](#starting-3dfin-in-cloudcompare)
     - [Running 3DFin with default settings](#running-3dfin-with-default-settings)
-    - [Understanding the 3DFin workflow outputs](#understanding-the-3dfin-workflow-outputs)
+    - [Understanding 3DFin point cloud outputs](#understanding-3dfin-point-cloud-outputs)
     - [Tabular output data](#tabular-output-data)
     - [Additional options in the Advanced mode](#additional-options-in-the-advanced-mode)
   - [Case I - adjusting DTM interpolation settings](#case-i---adjusting-dtm-interpolation-settings)
@@ -112,7 +112,7 @@ You will be continuously updated on the progress in the console window at the bo
 
 Running 3DFin on a point cloud can take anything from a few seconds up to several minutes depending on the size of the point cloud, the user-defined settings and the hardware. Typically, very long processing times (several hours) are not expected, since the process is limited by the available memory: too large datasets cannot be processed in the current version of the software. With the example dataset used in this Tutorial the processing time is approximately 5-10 min with a laptop with good (but not top-notch) performance (16 GB RAM, Intel i7 or similar).
 
-### Understanding the 3DFin workflow outputs
+### Understanding 3DFin point cloud outputs
 
 Once the program has finished, you will see some new outputs in the CloudCompare DB tree window as shown in Fig. 8 (marked with 1). By default, three of the seven output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem sections, the diameter at breast height and the total tree height.
 
