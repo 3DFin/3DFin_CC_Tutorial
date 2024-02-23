@@ -91,7 +91,9 @@ The basic tab provides only a few fundamental parameters that can be modified if
 - **Stripe Upper Limit** (marked with 4 in Fig. 6): As further explained below, the first step in the 3DFin work-flow bases on the identification of tree segments in the lower part of the forest stand. The idea for the two stripe parameters is to define a height range (referring to the height above ground) in which the trees stems are expected to be clearly visible. That is, understory elements (shrubs, herbs, grasses) and branches should **in ideal case** not be very dense and particularly they should not directly "connect" neighboring tree stems (that is, there should be as few as possible situation where connected point clouds reach from one tree stem to a neighboring tree stem). However, as explained below, 3DFin is also able to clean possible understorey and/or branches that could be present in the defined height range/stripe. You can define the upper and lower limit of the height range/stripe depending on the situation of the understory and the trees in your forest. A graphical example is provided to further clarify the idea (see graph marked with 4a in Fig. 6). Note that the height range/stripe defined by the upper and lower limit of the stripe ***should not be too small*** since very short tree segments increase the risk that the orientation of the segment is less representative for the orientation of the whole stem (see explanations with respect to stem axes below and Fig. 11) which is derived from the segments identified in this height range/stripe.
 - **Stripe Lower Limit** (marked with 4 in Fig. 6): See Stripe Upper Limit.
 - **Pruning Intensity** (marked with 5 in Fig. 6): During this step, points that are connected to the tree stems but belong to other tree elements (such as branches, leaves and/or understory) are iteratively deleted. Depending on how many of such other elements exist, you can adjust the numbers of iterations and thereby the intensity with which the algorithms tries to identify and drop such features. A value of 2 is recommended for most situations. Although in very clean forest plots and/or point clouds that are not noisy values of 0 (no pruning) or 1 could be used to reduce processing time. Higher values are preferable in cases where the trees have a large number of low branches, dense understory or in especially noisy point clouds. However, applying higher pruning intensities may lead to the elimination of stem fractions which were covered with low number of points. Note that pruning is performed twice: first during the stem identification within the stripe, and later during the whole stem extraction (some more details will be provided below).
-- **Output Directory** (marked with 6 in Fig. 6): Define the output directory to where you want to save the outputs created by the 3DFin work-flow.
+- **Cloth resolution** (marked with 6 in Fig. 6):
+3DFin uses a Cloth Simulation Filter (CSF) to generate a Digital Terrain Model (DTM). This DTM will then be used to normalize the height of every point in the point cloud with respect to it. [Case I - adjusting DTM interpolation settings](https://github.com/3DFin/3DFin_Tutorial?tab=readme-ov-file#case-i---adjusting-dtm-interpolation-settings) covers in detail the usage of this parameter.
+- **Output Directory** (marked with 7 in Fig. 6): Define the output directory to where you want to save the outputs created by the 3DFin work-flow.
 
 We will now run the 3DFin workflow for our dataset. For the general settings we **check** the "**Normalize Point Cloud**" box since our example dataset does not contain a normalized point cloud.
 
@@ -212,8 +214,6 @@ The Sections sheet shows the heights for which stem sections were determined (Fi
 *Quality sheets*
 The next four sheets contain information on the quality of each stem section. The first of the four quality sheets named *Q(Overall Quality 0-1)* is a binary summary of the other three quality sheet named *Q1(Outlier Probability)*, *Q2(Sector Occupancy)* and *Q3(Points Inner Circle)*
 
-**add explanation how binary layer is created**
-
 The  *Q1(Outlier Probability)* sheet contains a number for each stem segment of each trees  which indicates how likely it is that an identified segment is actually not part of the tree stem (as represented by all other tree segments of the same tree) (Fig. 21).  The higher the value, the more likely that the given section is an outlier. 
 
 ![Figure 21: Outlier Probability](figures/Fig_21_excel5.png)
@@ -306,7 +306,7 @@ So the results seem to be not as good as we have observed for the first dataset.
 
 **Figure 28: DTM visualization.**
 
-If we additionally activate the point cloud we can see that the interpolated DTM in some parts notable deviates from the point cloud (Fig. 30, marked in red). Please be aware that the visualization settings have been adjusted a bit (increased the point size of the DTM and changed the color-scale to "grey" for the point cloud) to make these problems a bit better visible.
+If we additionally activate the point cloud we can see that the interpolated DTM, in some parts, notably deviates from the point cloud (Fig. 30, marked in red). Please be aware that the visualization settings have been adjusted a bit (increased the point size of the DTM and changed the color-scale to "grey" for the point cloud) to make these problems a bit better visible.
 
 ![Figure 30: Mismatch between DTM and point cloud](figures/Fig_30.png)
 
