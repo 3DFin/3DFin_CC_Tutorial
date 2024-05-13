@@ -277,7 +277,7 @@ Expect more cases to be added in the future here!
 
 ### Modify cloth resolution to improve results 
 
-*This case covers a simple modification to Basic parameter "cloth resolution", which may improve substantially the results obtained with 3DFin. It also showcases a way to quickly assess visually the results by using the scalar field "dist_to_axis".*
+*This case covers a simple modification to Basic parameter "cloth resolution", which may improve substantially the results obtained with 3DFin. It also showcases a way to quickly assess visually the results by using the scalar field "dist_axes".*
  
 We will use a different dataset for this demonstration, which you can access here:
 
@@ -312,7 +312,7 @@ If we additionally activate the point cloud we can see that the interpolated DTM
 
 **Figure 30: Mismatch between DTM and point cloud.**
 
-**If we visualize the processed point cloud and activate "dist_to_axis" scalar field (Fig. 31), we can very easily check which trees have been detected and which haven't.** This is probably the easiest way to spot that something went wrong and the first thing you should do to assess the results. 
+**If we visualize the processed point cloud and activate "dist_axes" scalar field (Fig. 31), we can very easily check which trees have been detected and which haven't.** This is probably the easiest way to spot that something went wrong and the first thing you should do to assess the results. 
 
 ![Figure 31: Several trees were not detected](figures/Fig_31.png)
 
