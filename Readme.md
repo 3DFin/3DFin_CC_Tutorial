@@ -90,7 +90,7 @@ The basic tab provides only a few fundamental parameters that can be modified if
 - **Format of output tabular data** (marked with 3 in Fig. 6): 3DFin's processing chain will create some tables that store detailed information on the identified tree stems as key outputs. Here you can define whether you prefer to have these tables saved as CSV or an Excel file.
 - **Stripe Upper Limit** (marked with 4 in Fig. 6): As further explained below, the first step in the 3DFin work-flow bases on the identification of tree segments in the lower part of the forest stand. The idea for the two stripe parameters is to define a height range (referring to the height above ground) in which the trees stems are expected to be clearly visible. That is, understory elements (shrubs, herbs, grasses) and branches should **in ideal case** not be very dense and particularly they should not directly "connect" neighboring tree stems (that is, there should be as few as possible situation where connected point clouds reach from one tree stem to a neighboring tree stem). However, as explained below, 3DFin is also able to clean possible understorey and/or branches that could be present in the defined height range/stripe. You can define the upper and lower limit of the height range/stripe depending on the situation of the understory and the trees in your forest. A graphical example is provided to further clarify the idea (see graph marked with 4a in Fig. 6). Note that the height range/stripe defined by the upper and lower limit of the stripe ***should not be too small*** since very short tree segments increase the risk that the orientation of the segment is less representative for the orientation of the whole stem (see explanations with respect to stem axes below and Fig. 11) which is derived from the segments identified in this height range/stripe.
 - **Stripe Lower Limit** (marked with 4 in Fig. 6): See Stripe Upper Limit.
-- **Pruning Intensity** (marked with 5 in Fig. 6): During this step, points that are connected to the tree stems but belong to other tree elements (such as branches, leaves and/or understory) are iteratively deleted. Depending on how many of such other elements exist, you can adjust the numbers of iterations and thereby the intensity with which the algorithms tries to identify and drop such features. A value of 2 is recommended for most situations. Although in very clean forest plots and/or point clouds that are not noisy values of 0 (no pruning) or 1 could be used to reduce processing time. Higher values are preferable in cases where the trees have a large number of low branches, dense understory or in especially noisy point clouds. However, applying higher pruning intensities may lead to the elimination of stem fractions which were covered with low number of points. Note that pruning is performed twice: first during the stem identification within the stripe, and later during the whole stem extraction (some more details will be provided below).
+- **Pruning Intensity** (marked with 5 in Fig. 6): During this step, points that are connected to the tree stems but belong to other tree elements (such as branches, leaves and/or understory) are iteratively deleted. Depending on how many of such other elements exist, you can adjust the numbers of iterations and thereby the intensity with which the algorithms tries to identify and drop such features. A value of 2 is recommended for most situations. Although in very clean forest plots and/or point clouds that are not noisy, values of 0 (no pruning) or 1 could be used to reduce processing time. Higher values are preferable in cases where the trees have a large number of low branches, dense understory or in especially noisy point clouds. However, applying higher pruning intensities may lead to the elimination of stem fractions which were covered with low number of points. Note that pruning is performed twice: first during the stem identification within the stripe, and later during the whole stem extraction (some more details will be provided below).
 - **Cloth resolution** (marked with 6 in Fig. 6):
 3DFin uses a Cloth Simulation Filter (CSF) to generate a Digital Terrain Model (DTM). This DTM will then be used to normalize the height of every point in the point cloud with respect to it. [Case I - adjusting DTM interpolation settings](https://github.com/3DFin/3DFin_Tutorial?tab=readme-ov-file#case-i---adjusting-dtm-interpolation-settings) covers in detail the usage of this parameter.
 - **Output Directory** (marked with 7 in Fig. 6): Define the output directory to where you want to save the outputs created by the 3DFin work-flow.
@@ -101,7 +101,7 @@ Because our dataset was calculated with a terrestrial laserscanner, we do not ex
 
 As **tabular output data**, we select "**XLSX**".
 
-Exploring our dataset visually, we can see that we do not have a pronounced understory and that most of the tree trunks have comparably sparse branching structures in the lower parts of the tree trunk. Since some smaller understory elements (maybe herbs) which reach a maximal height of 1 m, we can for example set the **lower and higher stripe limit to 1.5 and 4.5 m, respectively**.
+Exploring our dataset visually, we can see that we do not have a pronounced understory and that most of the tree trunks have comparably sparse branching structures in the lower parts of the tree trunk. Since some smaller understory elements (maybe herbaceous vegetation) which reach a maximal height of 1 m, we can for example set the **lower and higher stripe limit to 1.5 and 4.5 m, respectively**.
 
 For the **pruning intensity** we keep the original setting of **2 iterations** which means that we expect low to intermediate branching (which matches our visual impression).
 
@@ -116,7 +116,7 @@ Running 3DFin on a point cloud can take anything from a few seconds up to severa
 
 ### Understanding 3DFin point cloud outputs
 
-Once the program has finished, you will see some new outputs in the CloudCompare DB tree window as shown in Fig. 8 (marked with 1). By default, three of the seven output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem sections, the diameter at breast height and the total tree height.
+Once the program has finished, you will see some new outputs in the CloudCompare DB tree window as shown in Fig. 8 (marked with 1). At this point, the user can close 3DFin window and start exploring the results. By default, three of the seven output files are visualized in the main visualization window of CloudCompare (Fig. 8 - marked with 2). These include the fitted stem sections, the diameter at breast height and the total tree height.
 
 ![Figure 8: Outputs of the 3DFin workflow](figures/Fig_08.png)
 
@@ -135,20 +135,20 @@ In Fig. 10, we can see the identified tree segments from the second step of the 
 ![Figure 10: Tree segments identified by the 3DFin workflow](figures/Fig_10_stem_segments.png)
 **Figure 10: Tree segments identified by the 3DFin workflow.**
 
-As next step in the workflow an axis is fitted through the centers of the tree section discs shown in Fig. 10. This step is accomplished by deriving the 1st axis of a Principal Component Analysis using the 3D-positions of the identified tree stem section centers as input. These fitted axes are then used as orientation for the circle-fitting algorithm. That is, along this axes, the algorithm will search for circular shapes, representing points reflected by the tree stem, within a circular buffer with a (optionally user-defined) fixed radius around the axis.  This step will repeated in regular (optionally user-defined) height intervals. The axes for our example dataset are shown in Fig. 11 and the respective circle fitting output is shown in Fig. 12.
+As next step in the workflow an axis is fitted through the centres of the tree section discs shown in Fig. 10. This step is accomplished by deriving the 1st axis of a Principal Component Analysis using the 3D-positions of the identified tree stem section centres as input. These fitted axes are then used as orientation for the circle-fitting algorithm. That is, along these axes, the algorithm will search for circular shapes, representing points reflected by the tree stem, within a circular buffer with a (optionally user-defined) fixed radius around the axis.  This step will be repeated in regular (optionally user-defined) height intervals. The axes for our example dataset are shown in Fig. 11 and the respective circle fitting output is shown in Fig. 12.
 
 ![Figure 11: Axes fitted from the tree stem segments](figures/Fig_11_axes.png)
 
 **Figure 11: Axes fitted from the tree stem segments.**
 
-The axes (in Fig. 11) are color-coded according to their tilting angle and you can see that axes that show a higher tilting relative to the other trees (that is, deviating notably from the average vertical orientation of a tree stems in the dataset) are shown in red. This is not necessarily an indicator for wrongly identified tree stems as trees sometimes are leaning but it might be a good idea to visually re-examine such trees by comparing the identified stem sections with the point cloud.
+The axes (in Fig. 11) are color-coded according to their tilting angle and you can see that axes that show a higher tilting relative to the other trees (that is, deviating notably from the average vertical orientation of a tree stems in the dataset) are shown in red. This is not necessarily an indicator for wrongly identified tree stems as trees sometimes are leaning toward a certain direction, but it might be a good idea to visually re-examine such trees by comparing the identified stem sections with the point cloud.
 
 ![Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11](figures/Fig_12_fitted_sections.png)
 **Figure 12: Circles fitted around the expected tree trunk as guided by the axes shown in Fig. 11.**
 
 Similarly, fitted circles that show unexpected dimensions (for example a notably larger radius than the circle below) or locations are displayed in red. Most of the time these problematic circles should not be considered during subsequent processing step since it is actually quite rare that for example a tree will increase its diameter (notably) with height or that the stem shape deviates notably from a vertically continuous cylinder-like form. Some information related to the circle fitting quality is also stored in the tabular output data that we will discuss further below in the Tutorial.
 
-![Figure 13: Distance axes](figures/13_distance_axis.png)
+![Figure 13: Distance axes](figures/Fig_13_distance_axis.png)
 
 **Figure 13: Distance axes.**
 
@@ -190,19 +190,19 @@ On the first sheet called "Plot Metrics" you find the total height (TH), the dia
 *Diameters*
 In the diameters sheet you can find diameter of all stem section (columns) of all trees (rows) (Fig. 18). The number of stem sections varies based on the height of the trees and you will see that as a consequence typically all trees will have several fields with 0 diameter in some higher stem section columns in the table.
 
-![Figure 18: Diameter sheet](figures/18_excel2.png)
+![Figure 18: Diameter sheet](figures/Fig_18_excel2.png)
 
 **Figure 18: Diameter sheet.**
 
 *X*
-The X sheet contains the x-coordinates of the center points of all stem sections (columns) of all trees (rows) (Fig. 19).
+The X sheet contains the x-coordinates of the centre points of all stem sections (columns) of all trees (rows) (Fig. 19).
 
 ![Figure 19: X sheet](figures/Fig_19_excel3.png)
 
 **Figure 19: X sheet.**
 
 *Y*
-The Y sheet contains the y-coordinates of the center points of all stem sections (columns) of all trees (rows)
+The Y sheet contains the y-coordinates of the centre points of all stem sections (columns) of all trees (rows).
 
 *Sections*
 The Sections sheet shows the heights for which stem sections were determined (Fig. 20). These values depend on the user-defined lowest section height and the selected height-interval. These values are the same for all trees an are hence only displayed once.
@@ -214,13 +214,13 @@ The Sections sheet shows the heights for which stem sections were determined (Fi
 *Quality sheets*
 The next four sheets contain information on the quality of each stem section. The first of the four quality sheets named *Q(Overall Quality 0-1)* is a binary summary of the other three quality sheet named *Q1(Outlier Probability)*, *Q2(Sector Occupancy)* and *Q3(Points Inner Circle)*
 
-The  *Q1(Outlier Probability)* sheet contains a number for each stem segment of each trees  which indicates how likely it is that an identified segment is actually not part of the tree stem (as represented by all other tree segments of the same tree) (Fig. 21).  The higher the value, the more likely that the given section is an outlier. 
+The  *Q1(Outlier Probability)* sheet contains a number for each stem section of each trees which indicates how likely it is that an identified section is actually not part of the tree stem (as represented by all other tree sections of the same tree) (Fig. 21).  The higher the value, the more likely that the given section is an outlier. 
 
 ![Figure 21: Outlier Probability](figures/Fig_21_excel5.png)
 
 **Figure 21: Outlier Probability.**
 
-This indicator value bases on a calculation which is illustrated in Fig. 22. To derive the indicator value, the inclination-angle the center of a given stem section disc with the centers of all other stem sections is calculated (see for example Tree A section 1 in Fig. 22). Then, all of these inclination angles are summarized into one value. This step is then repeated for all stem section discs. 
+This indicator value bases on a calculation which is illustrated in Fig. 22. To derive the indicator value, the inclination-angle from the centre of a given stem section with respect to the centres of all other stem sections is calculated (see for example Tree A section 1 in Fig. 22). Then, all of these inclination angles are summarized into one value. This step is then repeated for all stem section discs. 
 
 As shown in Fig. 22, the inclination angles (symbolized by the arrows) of the visualized stem sections of Tree A (Section 1,2,3,7) are all very comparable and hence the indicator would not identify an outlier here. An important property of this approach as compared to a simpler approach (for example simply checking for deviations from a straight standing cylinder) is that it also suitable for leaning stems (which can occur in forests quite frequently).
 
@@ -277,7 +277,7 @@ Expect more cases to be added in the future here!
 
 ### Modify cloth resolution to improve results 
 
-*This case covers a simple modification to Basic parameter "cloth resolution", which may improve substantially the results obtained with 3DFin. It also showcases a way to quickly assess visually the results by using the scalar field "dist_to_axis".*
+*This case covers a simple modification to Basic parameter "cloth resolution", which may improve substantially the results obtained with 3DFin. It also showcases a way to quickly assess visually the results by using the scalar field "dist_axes".*
  
 We will use a different dataset for this demonstration, which you can access here:
 
@@ -312,7 +312,7 @@ If we additionally activate the point cloud we can see that the interpolated DTM
 
 **Figure 30: Mismatch between DTM and point cloud.**
 
-**If we visualize the processed point cloud and activate "dist_to_axis" scalar field (Fig. 31), we can very easily check which trees have been detected and which haven't.** This is probably the easiest way to spot that something went wrong and the first thing you should do to assess the results. 
+**If we visualize the processed point cloud and activate "dist_axes" scalar field (Fig. 31), we can very easily check which trees have been detected and which haven't.** This is probably the easiest way to spot that something went wrong and the first thing you should do to assess the results. 
 
 ![Figure 31: Several trees were not detected](figures/Fig_31.png)
 
